@@ -1,0 +1,4 @@
+.DS_Store
+./env      # Python environment
+./weights  # Per epoch Weight
+./models   # Exported Model

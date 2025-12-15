@@ -1,0 +1,45 @@
+heart:
+  # Architecture parameters
+  base_model: "gpt2"
+
+  # Hierarchical recursion
+  supervision_segments: 4           # S - supervision segments
+  cycles_per_segment: 2             # C - cycles per segment
+  steps_per_cycle: 2                # R - steps per cycle
+
+  # Module dimensions
+  l_module_hidden: 256              # L-module hidden dimension
+  h_module_hidden: 512              # H-module hidden dimension
+  validator_hidden: 512
+  epistemic_classes: 4              # {accept, abstain, retrieve, repair}
+
+  # Effective depth
+  effective_depth: 48               # S * C * R * 3 ~= 48 layers
+
+  # Training
+  learning_rate: 0.005
+  batch_size: 32
+  epochs: 10
+
+  # Epistemic control
+  alignment_weight: 0.5
+  retrieve_threshold: 0.6
+  repair_max_iterations: 2
+
+  # Continual learning
+  enable_heart_cl: true
+  cl_learning_rate: 0.000001        # Very low for stability
+  cl_consistency_weight: 0.5
+  cl_retrieval_weight: 0.3
+
+  # Inference
+  temperature: 0.7
+  top_k: 40
+  top_p: 0.95
+  max_length: 256
+
+  # Monitoring
+  log_interval: 100
+  checkpoint_interval: 1000
+  save_checkpoints: true
+  checkpoint_dir: "models/heart/checkpoints"
